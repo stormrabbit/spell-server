@@ -14,7 +14,8 @@ export class SpellsController {
         const {
             cls = 'all',
         } = request.query;
-        console.log(`find ${cls} spells `);
+        console.log(`find ${cls} spells 2`);
+        console.log(__dirname + '/../**/*.entity{.ts,.js}');
         return await this.spellService.findAll(cls);
     }
 
