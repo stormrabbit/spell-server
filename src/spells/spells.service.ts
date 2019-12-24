@@ -3,7 +3,9 @@ import { Spell } from './interfaces/spell.interface';
 import { SpellET } from './spells.entity';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
-import { MongoRepository } from 'typeorm';
+import { MongoRepository , getMongoManager, getMongoRepository, ObjectID} from 'typeorm';
+import { ClassET } from './cls.entity';
+import { SplClsET } from './cls-spl.entity';
 
 
 @Injectable()
@@ -12,12 +14,34 @@ export class SpellsService {
 
         // Token要对应
         @Inject('LoginRepositoryToken')
-        private readonly loginRepository: MongoRepository<SpellET>,
+        private readonly spellRepository: MongoRepository<SpellET>,
+        @Inject('ClassRepositoryToken')
+        private readonly classRepository: MongoRepository<ClassET>,
+        @Inject('SplClsRepositoryToken')
+        private readonly splclsRepository: MongoRepository<SplClsET>,
     ) { }
     private readonly spells: Spell[] = [];
 
-    async findAll(cls: string): Promise<SpellET[]> {
-        return await this.loginRepository.find();
+    async findAll(cls: string) {
+        const manager =  getMongoManager();
+        const spR = getMongoRepository(SpellET);
+        const clsET:ClassET = await this.classRepository.findOne({name: 'wizard'});
+
+        console.log(clsET.id);
+        // const id = clsET.id.toString();
+        // console.log(id);
+        const res = await this.splclsRepository.find({class_id: clsET.id});
+        // const _id = res[0].spell_id;
+        // console.log(_id);
+        // return await this.loginRepository.find({_id});
+        const really = Promise.all(res.map( async (rs) =>  {
+            const temp = await this.spellRepository.findOne({_id: rs.spell_id});
+            // console.log(temp);
+            return temp;
+        })); 
+        console.log(really);
+        return really;
+        // return await this.classRepository.find();
         // return await this.spellModel.find().exec();
         // return await this.spellModel.aggregate([{
         //     $lookup: { // 左连接

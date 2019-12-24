@@ -2,6 +2,8 @@ import { Controller, Get, Req, Param } from '@nestjs/common';
 import { Request } from 'express';
 import { SpellsService } from './spells.service';
 import { Spell } from './interfaces/spell.interface';
+import { SplClsET } from './cls-spl.entity';
+import { SpellET } from './spells.entity';
 
 @Controller('spells')
 export class SpellsController {
@@ -10,12 +12,11 @@ export class SpellsController {
     // 查询法术，不传递 cls 表示查询全部
     // 否则查询特定职业法术
     @Get()
-    async findAllSpells(@Req() request: Request): Promise<Spell[]> {
+    async findAllSpells(@Req() request: Request) {
         const {
             cls = 'all',
         } = request.query;
-        console.log(`find ${cls} spells 2`);
-        console.log(__dirname + '/../**/*.entity{.ts,.js}');
+        // console.log('findAllSpells');
         return await this.spellService.findAll(cls);
     }
 

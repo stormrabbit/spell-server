@@ -1,9 +1,10 @@
 // login/login.entity.ts
-import { Entity, Column, ObjectID, ObjectIdColumn } from 'typeorm';
+import { Entity, Column, ObjectID, ObjectIdColumn, ManyToMany, JoinTable } from 'typeorm';
+import { ClassET } from './cls.entity';
 
 @Entity('spells')
 export class SpellET {
-  @ObjectIdColumn() id: ObjectID;
+  @ObjectIdColumn() _id: ObjectID;
   @Column() name: string;
   @Column() nickname: string;
 }
