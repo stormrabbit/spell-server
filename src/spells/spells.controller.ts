@@ -2,8 +2,6 @@ import { Controller, Get, Req, Param } from '@nestjs/common';
 import { Request } from 'express';
 import { SpellsService } from './spells.service';
 import { Spell } from './interfaces/spell.interface';
-import { SplClsET } from './cls-spl.entity';
-import { SpellET } from './spells.entity';
 
 @Controller('spells')
 export class SpellsController {
@@ -16,7 +14,6 @@ export class SpellsController {
         const {
             cls = 'all',
         } = request.query;
-        // console.log('findAllSpells');
         return await this.spellService.findAll(cls);
     }
 
