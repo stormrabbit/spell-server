@@ -5,6 +5,11 @@ import { ClassET } from './cls.entity';
 @Entity('spells')
 export class SpellET {
   @ObjectIdColumn() _id: ObjectID;
-  @Column() name: string;
   @Column() nickname: string;
+  @Column() school: string;
+  @Column() time: string;
+  @Column() range: string;
+  @Column() material: string;
+  @Column() describe: string;
+  @Column() upgrade: string;
 }

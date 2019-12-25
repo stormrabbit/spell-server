@@ -16,8 +16,9 @@ export class SpellsController {
         const {
             cls = 'all',
         } = request.query;
+        return await this.spellService.findAllAnother(cls);
         // console.log('findAllSpells');
-        return await this.spellService.findAll(cls);
+        // return await this.spellService.findAll(cls);
     }
 
     // 模糊查询
