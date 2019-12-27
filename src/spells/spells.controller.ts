@@ -17,6 +17,12 @@ export class SpellsController {
         return await this.spellService.findAll(cls);
     }
 
+    @Get('temp')
+    findTemp() {
+        console.log('temp===>');
+        const temp = {id: '123', name: '456'};
+        return JSON.stringify(temp);
+    }
     // 模糊查询
     @Get('includes/:nickname')
     async findSpellsByNickName(@Param() params): Promise<Spell[]> {
