@@ -4,5 +4,6 @@ export const SpellSchema = new mongoose.Schema(
     {
         name: String,
         nickname: String,
+        lvl:String,
     }
 );

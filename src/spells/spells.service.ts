@@ -16,15 +16,15 @@ export class SpellsService {
  
     // 根据职业查询法术
     async findAll(cls: string): Promise<Spell> {
-
         const classRes = await this.classModel.findOne({ name: cls }).exec();
         if (!!classRes) {
             const id = classRes._id;
             const findSpellByClass = await this.splCsModel.find({ class_id: id }).exec();
             const spellids = findSpellByClass.map(fsbc => fsbc.spell_id);
-            return await this.spellModel.find({ _id: { '$in': spellids } });
+            const noSortArray = await this.spellModel.find({ _id: { '$in': spellids } });
+            return noSortArray.sort((val1:Spell,val2:Spell)=> (parseInt(val1.lvl) - parseInt(val2.lvl))); // 根据等级升序排列
         }
-        return await this.spellModel.find().exec();
+        return await this.spellModel.find().sort({lvl: 1}).exec();
     }
 
     // 模糊查询
