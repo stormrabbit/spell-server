@@ -5,13 +5,14 @@ import { MongooseModule } from '@nestjs/mongoose';
 // import { ClassesController } from './classes/classes.controller';
 // import { ClassesService } from './classes/classes.service';
 import { ClassesModule } from './classes/classes.module';
+import { CharactorModule } from './charactor/charactor.module';
 
 @Module({
   imports: [
     MongooseModule.forRoot('mongodb://127.0.0.1:27017/dnd_spells'),
     SpellsModule,
     ClassesModule,
-
+    CharactorModule,
   ],
   controllers: [],
   providers: [],
