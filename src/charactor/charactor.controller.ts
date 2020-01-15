@@ -1,6 +1,7 @@
-import { Controller, Post, Body } from '@nestjs/common';
+import { Controller, Post, Body, Put, Param } from '@nestjs/common';
 import { CharactorService } from './charactor.service';
-import { CreateCharactorDto } from './create-charactor.dto';
+import { CreateCharactorDto } from "./dto/create-charactor.dto";
+import {UpdateCharactorDto} from './dto/update-charactor.dto';
 @Controller('charactor')
 export class CharactorController {
 
@@ -10,11 +11,14 @@ export class CharactorController {
 
     @Post('create')
     async createCharactor(@Body() createCharactorDto: CreateCharactorDto) {
-        console.log(createCharactorDto);
-        this.charactorService.createCharactor(createCharactorDto);
-        return '保存成功';
-        // return createCharactorDto;
-        // return charactorService.createCharactor();
+        return await this.charactorService.createCharactor(createCharactorDto);
+    }
+
+    @Put('update/:id')
+    async updateCharactorById(@Param('id') id: String, @Body() updateDto:UpdateCharactorDto) {
+        console.log(id);
+        console.log(updateDto);
+        return await this.charactorService.updateCharactor(updateDto);
     }
 
 }

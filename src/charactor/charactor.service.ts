@@ -1,9 +1,10 @@
 import { Injectable } from '@nestjs/common';
-import { CreateCharactorDto } from './create-charactor.dto';
+import { CreateCharactorDto } from "./dto/create-charactor.dto";
 
-import {Charactor} from './charactor.interface';
+import {Charactor} from './interface/charactor.interface';
 import {Model} from 'mongoose';
 import { InjectModel } from '@nestjs/mongoose';
+import { UpdateCharactorDto } from './dto/update-charactor.dto';
 @Injectable()
 export class CharactorService {
 
@@ -14,5 +15,9 @@ export class CharactorService {
     async createCharactor(createCharactor:CreateCharactorDto) {
         const create = new  this.charactorModel(createCharactor);
         return await create.save();
+    }
+
+    async updateCharactor(updateDto: UpdateCharactorDto ) {
+        return this.charactorModel.update({name: '更新'}, {$set: {race: '精灵'}}).exec();
     }
 }
