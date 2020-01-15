@@ -18,6 +18,6 @@ export class CharactorService {
     }
 
     async updateCharactor(updateDto: UpdateCharactorDto ) {
-        return this.charactorModel.update({name: '更新'}, {$set: {race: '精灵'}}).exec();
+        return this.charactorModel.update({_id: updateDto.id}, {$set: updateDto}).exec();
     }
 }
