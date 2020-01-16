@@ -5,6 +5,7 @@ import {Charactor} from './interface/charactor.interface';
 import {Model} from 'mongoose';
 import { InjectModel } from '@nestjs/mongoose';
 import { UpdateCharactorDto } from './dto/update-charactor.dto';
+import { RetrieveCharactorDto } from './dto/retrieve-charactor.dto';
 @Injectable()
 export class CharactorService {
 
@@ -19,5 +20,9 @@ export class CharactorService {
 
     async updateCharactor(updateDto: UpdateCharactorDto ) {
         return this.charactorModel.update({_id: updateDto.id}, {$set: updateDto}).exec();
+    }
+
+    async retrieveList(retrieveDto: RetrieveCharactorDto) {
+        return this.charactorModel.find(retrieveDto).exec();
     }
 }
