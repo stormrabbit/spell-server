@@ -27,4 +27,9 @@ export class CharactorController {
         return await this.charactorService.retrieveList(retrieveDto);
     }
 
+    @Get(':objectid')
+    async retrieveById(@Param() retrieveDto: RetrieveCharactorDto) {
+        return await this.charactorService.retrieveById(mongoose.Types.ObjectId(retrieveDto.objectid));
+    }
+
 }
