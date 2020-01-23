@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { CreateCharactorDto } from "./dto/create-charactor.dto";
 import * as mongoose from 'mongoose';
 import { Charactor } from './interface/charactor.interface';
-import { Model } from 'mongoose';
+import { Model, Types } from 'mongoose';
 import { InjectModel } from '@nestjs/mongoose';
 import { UpdateCharactorDto } from './dto/update-charactor.dto';
 import { RetrieveCharactorDto } from './dto/retrieve-charactor.dto';
@@ -14,7 +14,7 @@ export class CharactorService {
     ) { }
 
     async createCharactor(createCharactor: CreateCharactorDto) {
-        console.log(createCharactor);
+        createCharactor._id = Types.ObjectId();
         const create = new this.charactorModel(createCharactor);
         return await create.save();
     }

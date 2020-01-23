@@ -19,7 +19,6 @@ export class SpellsController {
 
     @Get('temp')
     findTemp() {
-        console.log('temp===>');
         const temp = {id: '123', name: '456'};
         return JSON.stringify(temp);
     }
