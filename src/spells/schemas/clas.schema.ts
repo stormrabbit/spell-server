@@ -4,5 +4,6 @@ export const ClassSchema = new mongoose.Schema(
     {
         name: String,
         nickname: String,
+        color: String,
     }
 );

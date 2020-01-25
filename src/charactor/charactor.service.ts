@@ -6,11 +6,15 @@ import { Model, Types } from 'mongoose';
 import { InjectModel } from '@nestjs/mongoose';
 import { UpdateCharactorDto } from './dto/update-charactor.dto';
 import { RetrieveCharactorDto } from './dto/retrieve-charactor.dto';
+import { Class } from 'src/spells/interfaces/class.interface';
+import { async } from 'rxjs/internal/scheduler/async';
+import { RetrieveResDto } from './dto/retrieve-res-charactor.dto';
 @Injectable()
 export class CharactorService {
 
     constructor(
-        @InjectModel('charactors') private readonly charactorModel: Model<Charactor>
+        @InjectModel('charactors') private readonly charactorModel: Model<Charactor>,
+        @InjectModel('classes') private readonly classesModel: Model<Class>,
     ) { }
 
     async createCharactor(createCharactor: CreateCharactorDto) {
@@ -24,7 +28,12 @@ export class CharactorService {
     }
 
     async retrieveList(retrieveDto: RetrieveCharactorDto) {
-        return await this.charactorModel.find(retrieveDto).exec();
+        const charactors: Charactor[] =  await this.charactorModel.find(retrieveDto).exec();
+        const _self = this;
+        return await  Promise.all(charactors.map(async (ch:Charactor) =>  {
+            const cls = await _self.classesModel.findOne({nickname: ch.cls}).exec();
+            return new RetrieveResDto(ch, cls);
+        })) ;
     }
 
     async retrieveById(id) {
