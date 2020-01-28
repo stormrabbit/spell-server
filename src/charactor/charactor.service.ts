@@ -28,7 +28,7 @@ export class CharactorService {
     }
 
     async retrieveList(retrieveDto: RetrieveCharactorDto) {
-        const charactors: Charactor[] =  await this.charactorModel.find(retrieveDto).exec();
+        const charactors: Charactor[] =  await this.charactorModel.find(retrieveDto).sort({_id: -1}).exec();
         const _self = this;
         return await  Promise.all(charactors.map(async (ch:Charactor) =>  {
             const cls = await _self.classesModel.findOne({nickname: ch.cls}).exec();
