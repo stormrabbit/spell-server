@@ -27,6 +27,11 @@ export class CharactorService {
         return await this.charactorModel.update({ _id: updateDto.id }, { $set: updateDto }).exec();
     }
 
+
+    async deleteCharactor() {
+           
+    }
+
     async retrieveList(retrieveDto: RetrieveCharactorDto) {
         const charactors: Charactor[] =  await this.charactorModel.find(retrieveDto).sort({_id: -1}).exec();
         const _self = this;
