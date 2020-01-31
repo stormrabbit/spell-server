@@ -1,4 +1,4 @@
-import { Controller, Post, Body, Put, Param, Get } from '@nestjs/common';
+import { Controller, Post, Body, Put, Param, Get, Delete } from '@nestjs/common';
 import { CharactorService } from './charactor.service';
 import { CreateCharactorDto } from "./dto/create-charactor.dto";
 import {UpdateCharactorDto} from './dto/update-charactor.dto';
@@ -30,6 +30,12 @@ export class CharactorController {
     @Get(':objectid')
     async retrieveById(@Param() retrieveDto: RetrieveCharactorDto) {
         return await this.charactorService.retrieveById(mongoose.Types.ObjectId(retrieveDto.objectid));
+    }
+
+    @Delete(':objectId')
+    async deleteById(@Param('objectId') objectId: String) {
+        console.log('删除角色===>' + objectId);
+        return await this.charactorService.deleteCharactor(mongoose.Types.ObjectId(objectId));
     }
 
 }

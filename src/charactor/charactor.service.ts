@@ -28,8 +28,8 @@ export class CharactorService {
     }
 
 
-    async deleteCharactor() {
-           
+    async deleteCharactor(id: any) {
+        return await this.charactorModel.remove({_id: id}).exec();
     }
 
     async retrieveList(retrieveDto: RetrieveCharactorDto) {
