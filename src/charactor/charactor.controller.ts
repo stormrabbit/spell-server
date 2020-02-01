@@ -34,7 +34,6 @@ export class CharactorController {
 
     @Delete(':objectId')
     async deleteById(@Param('objectId') objectId: String) {
-        console.log('删除角色===>' + objectId);
         return await this.charactorService.deleteCharactor(mongoose.Types.ObjectId(objectId));
     }
 
