@@ -24,12 +24,12 @@ export class CharactorService {
     }
 
     async updateCharactor(updateDto: UpdateCharactorDto) {
-        return await this.charactorModel.update({ _id: updateDto.id }, { $set: updateDto }).exec();
+        return await this.charactorModel.updateOne({ _id: updateDto.id }, { $set: updateDto }).exec();
     }
 
 
     async deleteCharactor(id: any) {
-        return await this.charactorModel.remove({_id: id}).exec();
+        return await this.charactorModel.deleteOne({_id: id}).exec();
     }
 
     async retrieveList(retrieveDto: RetrieveCharactorDto) {

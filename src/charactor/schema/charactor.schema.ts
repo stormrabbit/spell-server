@@ -9,7 +9,7 @@ export const CharactorSchema = new mongoose.Schema({
         race: String,
         school: String,
         cls: String,
-        value: Number,
+        value: String,
 },
     { versionKey: false } //  取消 _v 字段
 );

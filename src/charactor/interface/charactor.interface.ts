@@ -6,5 +6,5 @@ export interface Charactor extends Document {
     readonly race: string;
     readonly school: string;
     readonly cls: string;
-    readonly value: number;
+    readonly value: string;
 }
