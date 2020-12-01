@@ -3,7 +3,7 @@ import { ClassesService } from './classes.service';
 
 @Controller('classes')
 export class ClassesController {
-    constructor(private readonly classesServices:ClassesService ){}
+    constructor(private readonly classesServices: ClassesService) { }
     @Get()
     async findAllClasses() {
         return await this.classesServices.findAllClass();

@@ -1,4 +1,4 @@
-import {Document} from 'mongoose';
+import { Document } from 'mongoose';
 export interface Charactor extends Document {
     readonly _id: any;
     readonly name: string;
@@ -8,3 +8,7 @@ export interface Charactor extends Document {
     readonly cls: string;
     readonly value: string;
 }
+
+const get = <T>(params: T): T => params
+
+get(1)
